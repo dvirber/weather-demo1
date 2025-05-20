@@ -1,33 +1,86 @@
-
 <!DOCTYPE html>
 <html lang="he">
 <head>
   <meta charset="UTF-8">
-  <title>סוכן AI של מזג האוויר</title>
+  <title>סוכן AI - גיא</title>
   <style>
-    body { font-family: Arial; text-align: center; margin-top: 50px; direction: rtl; }
-    input, button { padding: 10px; font-size: 16px; }
-    #result { margin-top: 20px; font-size: 18px; }
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, #f0f8ff, #ffffff);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #007ACC;
+      color: white;
+      padding: 20px;
+      font-size: 24px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    button {
+      margin-top: 40px;
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      background-color: #007ACC;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005F99;
+    }
+    #output {
+      margin-top: 30px;
+      font-size: 20px;
+      color: #333;
+    }
   </style>
 </head>
 <body>
-  <h1>סוכן AI של מזג האוויר</h1>
-  <input type="text" id="cityInput" placeholder="הכנס שם עיר" />
-  <button onclick="getWeather()">בדוק מזג אוויר</button>
-  <div id="result"></div>
+  <header>🎤 סוכן גיא - דבר איתי</header>
+  <button onclick="startListening()">🎙️ לחץ ודבר</button>
+  <div id="output"></div>
 
   <script>
-    async function getWeather() {
-      const city = document.getElementById('cityInput').value;
-      const resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = "טוען נתונים...";
-      try {
-        const res = await fetch(`https://wttr.in/${city}?format=3`);
-        const data = await res.text();
-        resultDiv.innerHTML = data;
-      } catch (err) {
-        resultDiv.innerHTML = "אירעה שגיאה. נסה שוב.";
-      }
+    const outputDiv = document.getElementById('output');
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'he-IL';
+      speechSynthesis.speak(utterance);
+    }
+
+    function smartReply(text) {
+      text = text.toLowerCase();
+      if (text.includes("מה שלומך")) return "הכל טוב אח שלי, אני סוכן גיא, מוכן לעזור!";
+      if (text.includes("מזג האוויר")) return "נראה שיש יום יפה בחוץ, תצא תיהנה!";
+      if (text.includes("מה השם שלך")) return "אני גיא, סוכן AI החכם שלך!";
+      if (text.includes("מה השעה")) return "השעה עכשיו היא " + new Date().toLocaleTimeString('he-IL');
+      if (text.includes("תודה")) return "בשמחה אח שלי!";
+      if (text.includes("איך אני נראה")) return "נראה שאתה בן אדם מדהים, גם מבפנים וגם מבחוץ!";
+      return "מעניין... רוצה לשאול אותי משהו אחר?";
+    }
+
+    function startListening() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'he-IL';
+      recognition.start();
+
+      recognition.onresult = function(event) {
+        const userSpeech = event.results[0][0].transcript;
+        outputDiv.innerHTML = "אתה אמרת: " + userSpeech;
+        const reply = smartReply(userSpeech);
+        setTimeout(() => {
+          outputDiv.innerHTML += "<br><b>גיא:</b> " + reply;
+          speak(reply);
+        }, 500);
+      };
+
+      recognition.onerror = function(event) {
+        outputDiv.innerHTML = "שגיאה: לא הבנתי, נסה שוב";
+      };
     }
   </script>
 </body>
