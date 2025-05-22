@@ -1,87 +1,76 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>סוכן AI - גיא</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>קליניקת טיפוח לנשים</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background: linear-gradient(to bottom, #f0f8ff, #ffffff);
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #007ACC;
-      color: white;
-      padding: 20px;
-      font-size: 24px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    button {
-      margin-top: 40px;
-      padding: 15px 30px;
-      font-size: 18px;
-      border: none;
-      background-color: #007ACC;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #005F99;
-    }
-    #output {
-      margin-top: 30px;
-      font-size: 20px;
-      color: #333;
+      font-family: 'Assistant', sans-serif;
     }
   </style>
 </head>
-<body>
-  <header>🎤 סוכן גיא - דבר איתי</header>
-  <button onclick="startListening()">🎙️ לחץ ודבר</button>
-  <div id="output"></div>
+<body class="bg-white text-gray-800">
 
-  <script>
-    const outputDiv = document.getElementById('output');
+  <!-- Hero Section -->
+  <section class="bg-[url('https://images.unsplash.com/photo-1588776814546-ec7f5b3d012b')] bg-cover bg-center h-screen relative flex items-center justify-center">
+    <div class="bg-black bg-opacity-40 absolute inset-0"></div>
+    <div class="relative z-10 text-center text-white max-w-2xl px-6">
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">קליניקה נשית לטיפוח ופינוק</h1>
+      <p class="text-lg mb-6">טיפולים קוסמטיים מקצועיים ועיסויים מרגיעים – לנשים בלבד, באווירה פרטית ושלווה.</p>
+      <a href="#contact" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition">לתיאום טיפול</a>
+    </div>
+  </section>
 
-    function speak(text) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'he-IL';
-      speechSynthesis.speak(utterance);
-    }
+  <!-- Services Section -->
+  <section class="py-16 px-4 md:px-20 bg-gray-50">
+    <h2 class="text-3xl font-bold text-center mb-12">הטיפולים שלנו</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="bg-white rounded-2xl shadow-xl p-6 text-center">
+        <img src="https://images.unsplash.com/photo-1618831046835-ea6c5516bc62" class="rounded-xl mb-4 w-full h-52 object-cover" alt="ניקוי פנים">
+        <h3 class="text-xl font-semibold mb-2">ניקוי פנים עמוק</h3>
+        <p class="text-gray-600">טיפול מקצועי לניקוי וניקוז העור, חידוש ומראה זוהר.</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-xl p-6 text-center">
+        <img src="https://images.unsplash.com/photo-1612423284934-26b06c7f141f" class="rounded-xl mb-4 w-full h-52 object-cover" alt="עיסוי פנים">
+        <h3 class="text-xl font-semibold mb-2">עיסוי פנים מרגיע</h3>
+        <p class="text-gray-600">עיסוי עדין ומרגיע המשפר את זרימת הדם ומרגיע את הנפש.</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-xl p-6 text-center">
+        <img src="https://images.unsplash.com/photo-1608222351217-18b1f35d6c89" class="rounded-xl mb-4 w-full h-52 object-cover" alt="עיסוי גוף">
+        <h3 class="text-xl font-semibold mb-2">עיסוי גוף לנשים</h3>
+        <p class="text-gray-600">עיסוי גוף מפנק ומשחרר, בהתאמה אישית לנשים בלבד.</p>
+      </div>
+    </div>
+  </section>
 
-    function smartReply(text) {
-      text = text.toLowerCase();
-      if (text.includes("מה שלומך")) return "הכל טוב אח שלי, אני סוכן גיא, מוכן לעזור!";
-      if (text.includes("מזג האוויר")) return "נראה שיש יום יפה בחוץ, תצא תיהנה!";
-      if (text.includes("מה השם שלך")) return "אני גיא, סוכן AI החכם שלך!";
-      if (text.includes("מה השעה")) return "השעה עכשיו היא " + new Date().toLocaleTimeString('he-IL');
-      if (text.includes("תודה")) return "בשמחה אח שלי!";
-      if (text.includes("איך אני נראה")) return "נראה שאתה בן אדם מדהים, גם מבפנים וגם מבחוץ!";
-      return "מעניין... רוצה לשאול אותי משהו אחר?";
-    }
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 px-4 md:px-20 bg-white">
+    <h2 class="text-3xl font-bold text-center mb-12">מעוניינת לתאם טיפול?</h2>
+    <form class="max-w-xl mx-auto bg-gray-50 p-8 rounded-2xl shadow-xl">
+      <div class="mb-4">
+        <label class="block mb-2 font-semibold">שם מלא</label>
+        <input type="text" class="w-full p-3 rounded-lg border border-gray-300" placeholder="הקלידי את שמך" required>
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-semibold">מספר טלפון</label>
+        <input type="tel" class="w-full p-3 rounded-lg border border-gray-300" placeholder="052-0000000" required>
+      </div>
+      <div class="mb-4">
+        <label class="block mb-2 font-semibold">הודעה</label>
+        <textarea class="w-full p-3 rounded-lg border border-gray-300" rows="4" placeholder="איזה טיפול מעניין אותך?" required></textarea>
+      </div>
+      <button type="submit" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-full w-full transition">שליחה</button>
+    </form>
+  </section>
 
-    function startListening() {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'he-IL';
-      recognition.start();
+  <!-- Footer -->
+  <footer class="text-center py-8 text-gray-500">
+    &copy; 2025 קליניקת טיפוח לנשים | כל הזכויות שמורות
+  </footer>
 
-      recognition.onresult = function(event) {
-        const userSpeech = event.results[0][0].transcript;
-        outputDiv.innerHTML = "אתה אמרת: " + userSpeech;
-        const reply = smartReply(userSpeech);
-        setTimeout(() => {
-          outputDiv.innerHTML += "<br><b>גיא:</b> " + reply;
-          speak(reply);
-        }, 500);
-      };
-
-      recognition.onerror = function(event) {
-        outputDiv.innerHTML = "שגיאה: לא הבנתי, נסה שוב";
-      };
-    }
-  </script>
 </body>
 </html>
+
