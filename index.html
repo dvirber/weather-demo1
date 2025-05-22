@@ -1,97 +1,72 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>קליניקת ליזה – טיפוח נשי יוקרתי</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Future Gun Game</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
     body {
-      font-family: 'Assistant', sans-serif;
-      background: linear-gradient(to bottom, #fff1f4, #ffffff);
+      margin: 0;
+      overflow: hidden;
+      background: radial-gradient(ellipse at center, #0f0f1a 0%, #000000 100%);
+      cursor: crosshair;
+    }
+    canvas {
+      display: block;
     }
   </style>
 </head>
-<body class="text-gray-800">
+<body>
+<canvas id="gameCanvas"></canvas>
 
-  <!-- Hero Section -->
-  <section class="h-screen flex items-center justify-center text-center px-6 bg-[url('https://images.unsplash.com/photo-1588776814546-bacb8f42d47f')] bg-cover bg-center">
-    <div class="bg-white/80 backdrop-blur-md p-10 rounded-3xl shadow-2xl max-w-2xl">
-      <h1 class="text-4xl md:text-5xl font-bold text-pink-800 mb-4">קליניקת ליזה – טיפולי יופי לנשים בלבד</h1>
-      <p class="text-lg text-gray-700 leading-relaxed mb-6">
-        ברוכה הבאה לעולם של שקט, רוגע וסטייל רומאי יוקרתי.<br>
-        טיפולי פנים, עיסויים וטיפוח לגוף ולנפש – באווירה שמרוממת את הנשמה.
-      </p>
-      <a href="#contact" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-3 px-6 rounded-full transition shadow-lg">לתיאום ייעוץ אישי</a>
-    </div>
-  </section>
+<script>
+  const canvas = document.getElementById("gameCanvas");
+  const ctx = canvas.getContext("2d");
+  let shots = [];
 
-  <!-- Services Section -->
-  <section class="py-20 px-6 md:px-24 bg-white">
-    <h2 class="text-3xl font-bold text-center text-pink-800 mb-12">הטיפולים בקליניקה של ליזה</h2>
-    <div class="grid md:grid-cols-3 gap-12 text-center">
-      <div class="bg-[#fff9fb] p-8 rounded-2xl shadow-lg border border-rose-100">
-        <img src="https://images.unsplash.com/photo-1619454027714-bd96f1c87349" alt="facial treatment" class="w-full h-48 object-cover rounded-xl mb-4">
-        <h3 class="text-xl font-semibold text-pink-700 mb-2">ניקוי פנים רומאי</h3>
-        <p class="text-gray-600 leading-relaxed">טיפול עומק מפנק לעור פנים זוהר, עם מסכות טבעיות וליווי אישי של ליזה.</p>
-      </div>
-      <div class="bg-[#fff9fb] p-8 rounded-2xl shadow-lg border border-rose-100">
-        <img src="https://images.unsplash.com/photo-1588776814470-dc343d6b632d" alt="relaxing massage" class="w-full h-48 object-cover rounded-xl mb-4">
-        <h3 class="text-xl font-semibold text-pink-700 mb-2">עיסוי גוף לנשים</h3>
-        <p class="text-gray-600 leading-relaxed">עיסוי מקצועי בשמנים רומאיים ייחודיים להרפיית מתחים ואיזון נפשי עמוק.</p>
-      </div>
-      <div class="bg-[#fff9fb] p-8 rounded-2xl shadow-lg border border-rose-100">
-        <img src="https://images.unsplash.com/photo-1608219761410-68f4adfa2740" alt="luxury care" class="w-full h-48 object-cover rounded-xl mb-4">
-        <h3 class="text-xl font-semibold text-pink-700 mb-2">טיפול יופי כולל</h3>
-        <p class="text-gray-600 leading-relaxed">שילוב של טיפוח פנים, עיסוי צוואר, ניקוי ותחושת רוגע עמוקה – כל מה שאת צריכה.</p>
-      </div>
-    </div>
-  </section>
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
 
-  <!-- About / Why Us -->
-  <section class="py-20 px-6 md:px-24 bg-gradient-to-b from-white to-rose-50">
-    <h2 class="text-3xl font-bold text-center text-pink-800 mb-12">למה קליניקת ליזה?</h2>
-    <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-10 text-gray-700 text-lg leading-relaxed">
-      <div>
-        ✧ אווירה יוקרתית ועיצוב רומאי מפנק<br>
-        ✧ טיפולים מקצועיים באיכות הגבוהה ביותר<br>
-        ✧ זמינות גבוהה, מענה אישי וליווי חם<br>
-        ✧ מותאם במיוחד לנשים – לנפש ולגוף
-      </div>
-      <div>
-        ✧ תוצאה נראית כבר מהטיפול הראשון<br>
-        ✧ חיבור בין אסתטיקה לשלווה פנימית<br>
-        ✧ קליניקה אינטימית ומזמינה בסטנדרט חדש<br>
-        ✧ ליזה – למעלה מ־10 שנות ניסיון והבנה אמיתית ביופי נשי
-      </div>
-    </div>
-  </section>
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-20 px-6 md:px-24 bg-white">
-    <h2 class="text-3xl font-bold text-center text-pink-800 mb-8">השאירי פרטים וליזה תחזור אלייך</h2>
-    <form class="max-w-xl mx-auto bg-rose-50 p-10 rounded-2xl shadow-xl border border-rose-200">
-      <div class="mb-6">
-        <label class="block mb-2 font-semibold text-gray-700">שם מלא</label>
-        <input type="text" required class="w-full p-3 rounded-lg border border-gray-300" placeholder="לדוגמה: שיר כהן" />
-      </div>
-      <div class="mb-6">
-        <label class="block mb-2 font-semibold text-gray-700">מספר טלפון</label>
-        <input type="tel" required class="w-full p-3 rounded-lg border border-gray-300" placeholder="050-0000000" />
-      </div>
-      <div class="mb-6">
-        <label class="block mb-2 font-semibold text-gray-700">מה מעניין אותך?</label>
-        <textarea required rows="3" class="w-full p-3 rounded-lg border border-gray-300" placeholder="לדוגמה: טיפול פנים, עיסוי גב, שעות מועדפות..."></textarea>
-      </div>
-      <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-6 rounded-full w-full transition">שליחה</button>
-    </form>
-  </section>
+  function shoot(x, y) {
+    shots.push({ x, y, time: Date.now() });
+    const audio = new Audio("https://assets.mixkit.co/sfx/preview/mixkit-laser-gun-shot-1671.mp3");
+    audio.volume = 0.4;
+    audio.play();
+  }
 
-  <!-- Footer -->
-  <footer class="text-center py-8 text-gray-500 bg-rose-50">
-    &copy; 2025 קליניקת ליזה | לנשים בלבד | כל הזכויות שמורות
-  </footer>
+  canvas.addEventListener("click", (e) => {
+    shoot(e.clientX, e.clientY);
+  });
 
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw laser effect
+    const now = Date.now();
+    shots = shots.filter(s => now - s.time < 300);
+    shots.forEach(shot => {
+      const age = now - shot.time;
+      const alpha = 1 - age / 300;
+      const radius = 30 * (1 - age / 300);
+
+      ctx.beginPath();
+      ctx.arc(shot.x, shot.y, radius, 0, 2 * Math.PI);
+      ctx.fillStyle = `rgba(0, 255, 255, ${alpha})`;
+      ctx.fill();
+      ctx.strokeStyle = `rgba(0, 255, 255, ${alpha})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+</script>
 </body>
 </html>
